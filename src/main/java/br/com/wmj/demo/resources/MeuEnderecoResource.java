@@ -31,7 +31,7 @@ public class MeuEnderecoResource {
     @Autowired
     private MeuEnderecoService service;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces="application/json", consumes="application/json")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
     public ResponseEntity<MeuEndereco> find(@PathVariable Integer id) {
         MeuEndereco obj = service.find(id);
         return ResponseEntity.ok().body(obj);
@@ -47,11 +47,17 @@ public class MeuEnderecoResource {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update( @RequestBody MeuEndereco obj, @PathVariable Integer id) {
+    public ResponseEntity<Void> update(@RequestBody MeuEndereco obj, @PathVariable Integer id) {
         obj.setId(id);
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
 
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
